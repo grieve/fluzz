@@ -1,10 +1,19 @@
 'use strict';
 
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 var webpack = require('gulp-webpack-build');
 
 var Tasks = {
-    build: function() {
+    sass: function() {
+        gulp.src('./src/scss/main.scss')
+            .pipe(sass().on('error', sass.logError))
+            .pipe(gulp.dest('../static/css/'));
+    },
+    sassWatch: function() {
+        gulp.watch('./src/scss/**/*.scss', ['sass']);
+    },
+    js: function() {
         return gulp.src('./webpack.config.js')
             .pipe(webpack.init())
             .pipe(webpack.props({
@@ -22,7 +31,7 @@ var Tasks = {
             }))
             .pipe(gulp.dest('./'));
     },
-    watch: function() {
+    jsWatch: function() {
         return gulp.watch('src/js/**/*.@(hbs|js)')
             .on('change', function(event) {
                 if (event.type === 'changed') {
@@ -47,7 +56,11 @@ var Tasks = {
     }
 };
 
-gulp.task('build', Tasks.build);
-gulp.task('watch', Tasks.watch);
+gulp.task('sass',       Tasks.sass);
+gulp.task('sass:watch', Tasks.sassWatch);
+gulp.task('js',         Tasks.js);
+gulp.task('js:watch',   Tasks.jsWatch);
 
-gulp.task('default', ['build']);
+gulp.task('build',      ['sass', 'js']);
+gulp.task('watch',      ['sass:watch', 'js:watch']);
+gulp.task('default',    ['build']);
