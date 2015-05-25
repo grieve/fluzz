@@ -3,6 +3,7 @@
 /.data
 /.dockerbuild
 *.bundle.js*
+/app/static/css/main.css
 
 
 # Created by https://www.gitignore.io
