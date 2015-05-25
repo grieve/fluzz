@@ -81,7 +81,6 @@ def admin_start():
 
 
 @app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
 def index(path):
     context = {}
     if 'uuid' in session:
@@ -95,6 +94,11 @@ def index(path):
         context['name'] = player['name']
 
     return render_template('index.html', context=json.dumps(context))
+
+
+@app.route('/<path:path>')
+def catch_all(path):
+    return redirect('/')
 
 
 if __name__ == '__main__':

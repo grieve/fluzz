@@ -3,6 +3,7 @@
 var $ = require('jquery');
 var BaseView = require('./base');
 var State = require('../state');
+var alert = require('./subs/alert');
 
 var tmpl = require('./controller.hbs');
 
@@ -26,13 +27,16 @@ var ControllerView = BaseView.extend({
             .removeAttr('disabled');
     },
     onPress: function(evt) {
-        var selected = $(evt.currentTarget).data('id');
-        State.socket.emit('fluzz:answer', {selected: selected});
+        this.selected = $(evt.currentTarget).data('id');
+        State.socket.emit('fluzz:answer', {selected: this.selected});
     },
     onQuestion: function() {
         this.reset();
     },
     onAnswer: function(data) {
+        if (this.selected !== data.selected) {
+            alert('danger', 'You already answered this question', 4000);
+        }
         var $selected = this.$el.find('[data-id="' + data.selected + '"]');
         console.log($selected);
         this.$el.find('.btn-buzz').each(function(idx, elem) {
