@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+}
+
+main {
+    height: calc(100% - 80px);
+}
+
+.controller-wrapper {
+    height: 100%;
+}
+
+.btn-buzz {
+    height: 21%;
+    width: 90%;
+    margin: 2% 5%;
+
+    &.btn-selected {
+        box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+    }
+}
