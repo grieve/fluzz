@@ -1,0 +1,25 @@
+{
+    "name": "The Great Test Quiz",
+    "questions": [
+        {
+            "question": "Who created this crap software?",
+            "options": [
+                "Terry Wogan",
+                "Lana Del Ray",
+                "Ryan Grieve",
+                "Jim Belushi"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "Was the previous question crap?",
+            "options": [
+                "Yes",
+                "Maybe",
+                "No",
+                "Other"
+            ],
+            "answer": 0
+        }
+    ]
+}
