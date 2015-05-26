@@ -1,5 +1,5 @@
 <div class="container presenter">
-    <div class="row">
+    <div class="row tall">
         <div class="col-lg-10 answer-column">
             <div class="question-pane">
                 <span class="question-text">
@@ -7,22 +7,38 @@
                 </span>
             </div>
             <div class="answer-grid">
-                <button class="btn btn-info btn-lg btn-buzz-answer"></button>
-                <span class="answer">
-                    {{question.options.[0]}}
-                </span>
-                <button class="btn btn-primary btn-lg btn-buzz-answer"></button>
-                <span class="answer">
-                    {{question.options.[1]}}
-                </span>
-                <button class="btn btn-success btn-lg btn-buzz-answer"></button>
-                <span class="answer">
-                    {{question.options.[2]}}
-                </span>
-                <button class="btn btn-danger btn-lg btn-buzz-answer"></button>
-                <span class="answer">
-                    {{question.options.[3]}}
-                </span>
+                <div class="row">
+                    <button
+                        class="btn btn-info btn-lg btn-buzz-answer col-xs-1"
+                    >&nbsp;</button>
+                    <div class="answer col-xs-10 col-xs-offset-1">
+                        {{question.options.[0]}}
+                    </div>
+                </div>
+                <div class="row">
+                    <button
+                        class="btn btn-primary btn-lg btn-buzz-answer col-xs-1"
+                    >&nbsp;</button>
+                    <div class="answer col-xs-10 col-xs-offset-1">
+                        {{question.options.[1]}}
+                    </div>
+                </div>
+                <div class="row">
+                    <button
+                        class="btn btn-success btn-lg btn-buzz-answer col-xs-1"
+                    >&nbsp;</button>
+                    <div class="answer col-xs-10 col-xs-offset-1">
+                        {{question.options.[2]}}
+                    </div>
+                </div>
+                <div class="row">
+                    <button
+                        class="btn btn-danger btn-lg btn-buzz-answer col-xs-1"
+                    >&nbsp;</button>
+                    <div class="answer col-xs-10 col-xs-offset-1">
+                        {{question.options.[3]}}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-lg-2">

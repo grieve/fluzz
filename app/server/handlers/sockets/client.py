@@ -16,7 +16,9 @@ def join(data):
             name=data['name']
         )
         active = models.Quiz.query({'active': True}).get()
-        socketio.emit('fluzz:join', {'name': player.name, 'active': active._record})
+        if active is not None:
+            active = active._record
+        socketio.emit('fluzz:join', {'name': player.name, 'active': active})
 
     socketio.join_room(session['uuid'])
 

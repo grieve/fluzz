@@ -23,9 +23,10 @@ main {
 .presenter {
     height: 100%;
 
-    .container, .row {
+    .tall {
         height: 100%;
     }
+
 }
 
 .question-pane {
@@ -42,17 +43,12 @@ main {
 .answer-grid {
     height: 50%;
 
-    .btn-buzz-answer {
-        height: 20%;
-        width: 10%;
-        margin: 2% 5%;
-        margin-top: 2px;
+    .row {
+        height: 25%;
     }
     
     .answer {
-        display: inline;
         font-size: 2.2em;
-        width: 75%;
     }
 }
 
