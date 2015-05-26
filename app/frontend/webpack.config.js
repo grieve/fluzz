@@ -10,7 +10,9 @@ module.exports = {
         ]
     },
     entry: {
-        app: './src/js/main',
+        app: './src/js/client/main',
+        admin: './src/js/admin/main',
+        present: './src/js/presenter/main',
         vendor: ['jquery', 'underscore', 'backbone']
     },
     output: {

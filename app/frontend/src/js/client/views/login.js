@@ -1,7 +1,7 @@
 'use strict';
 
 
-var BaseView = require('./base');
+var BaseView = require('../../shared/views/base');
 var State = require('../state');
 
 var tmpl = require('./login.hbs');
@@ -51,7 +51,14 @@ module.exports = BaseView.extend({
             console.log('Join OK', data.name);
             State.playerName = data.name;
             $('#player-name').html(" - " + data.name);
-            State.router.navigate('wait', {trigger: true});
+
+            if (data.active) {
+                State.router.navigate('quiz', {trigger: true});
+            }
+
+            else {
+                State.router.navigate('wait', {trigger: true});
+            }
         }
     }
 });

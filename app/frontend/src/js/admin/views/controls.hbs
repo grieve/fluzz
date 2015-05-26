@@ -1,0 +1,38 @@
+{{#if quiz.name}}
+<div class="jumbotron">
+    <h2>{{quiz.name}}</h2>
+    <p>Question #{{quiz.current_question}}</p>
+</div>
+{{/if}}
+<div class="container">
+    <div class="row">
+        <button
+            class="btn btn-success btn-buzz"
+            {{#if quiz.name}}disabled="disabled"{{/if}}
+            id="start"
+        >
+            Start!
+        </button>
+        <button
+            class="btn btn-warning btn-buzz"
+            {{#unless quiz.name}}disabled="disabled"{{/unless}}
+            id="answer"
+        >
+            End Round
+        </button>
+        <button
+            class="btn btn-info btn-buzz"
+            {{#unless quiz.name}}disabled="disabled"{{/unless}}
+            id="next"
+        >
+            Next Round
+        </button>
+        <button
+            class="btn btn-danger btn-buzz" 
+            {{#unless quiz.name}}disabled="disabled"{{/unless}}
+            id="end"
+        >
+            End Quiz
+        </button>
+    </div>
+</div>

@@ -52,6 +52,8 @@ class QueryModel(object):
 
     def __getattr__(self, name):
         print 'get', name, self._record
+        if name not in self._record:
+            return None
         return self._record[name]
 
     def __setattr__(self, name, value):

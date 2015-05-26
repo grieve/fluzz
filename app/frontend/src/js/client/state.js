@@ -1,6 +1,6 @@
 'use strict';
 
-var io = require('exports?io!./libs/socket.io.min');
+var io = require('exports?io!../libs/socket.io.min');
 
 var State = function() {
     var socket = io.connect();

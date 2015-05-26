@@ -7,7 +7,6 @@ from flask import render_template
 
 
 from .. import app
-from .. import quiz
 from .. import models
 
 
@@ -17,18 +16,23 @@ def logout():
     return redirect('/')
 
 
-@app.route('/_admin')
+@app.route('/admin')
 def admin_index():
+    context = {}
     active_quiz = models.Quiz.query({'active': True}).get()
-    if len(active_quiz) > 0:
-        active_quiz = active_quiz[0]
-    return render_template('admin.html', quiz=active_quiz)
+    if active_quiz is not None:
+        context['active'] = active_quiz._record
+    return render_template('admin.html', context=json.dumps(context))
 
 
-@app.route('/_admin/start')
-def admin_start():
-    quiz.start()
-    return "OK"
+@app.route('/live')
+def live_view():
+    return render_template('live.html', context=json.dumps({}))
+
+
+@app.route('/live/<path:path>')
+def live_catch_all(path):
+    return redirect('/live')
 
 
 @app.route('/', defaults={'path': ''})

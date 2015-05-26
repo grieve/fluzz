@@ -1,8 +1,8 @@
 from flask import session
 from flask.ext import socketio
 
-from .. import io
-from .. import models
+from ... import io
+from ... import models
 
 
 @io.on('fluzz:join')
@@ -15,7 +15,8 @@ def join(data):
             id=session['uuid'],
             name=data['name']
         )
-        socketio.emit('fluzz:join', {'name': player.name})
+        active = models.Quiz.query({'active': True}).get()
+        socketio.emit('fluzz:join', {'name': player.name, 'active': active._record})
 
     socketio.join_room(session['uuid'])
 
@@ -27,7 +28,7 @@ def answer(data):
     already_answered = models.Question.query({
         'player': player.id,
         'quiz': active_quiz.id,
-        'question': active_quiz.currentQuestion
+        'question': active_quiz.current_question
     }).get()
 
     if already_answered is not None:
@@ -38,7 +39,7 @@ def answer(data):
     else:
         models.Question.create(
             quiz=active_quiz.id,
-            question=active_quiz.currentQuestion,
+            question=active_quiz.current_question,
             player=player.id,
             answer=data['selected']
         )

@@ -1,9 +1,9 @@
 'use strict';
 
 var $ = require('jquery');
-var BaseView = require('./base');
+var BaseView = require('../../shared/views/base');
 var State = require('../state');
-var alert = require('./subs/alert');
+var alert = require('../../shared/views/alert');
 
 var tmpl = require('./controller.hbs');
 
@@ -16,6 +16,8 @@ var ControllerView = BaseView.extend({
         this.context = {};
         State.socket.on('fluzz:question', this.onQuestion.bind(this));
         State.socket.on('fluzz:answer', this.onAnswer.bind(this));
+        State.socket.on('fluzz:result', this.onResult.bind(this));
+        State.socket.on('fluzz:end', this.onEnd.bind(this));
     },
     render: function() {
         this.$el.html(tmpl(this.context));
@@ -51,6 +53,18 @@ var ControllerView = BaseView.extend({
                 $elem.addClass('btn-selected');
             }
         });
+    },
+    onResult: function(question) {
+        if (this.selected === question.answer) {
+            alert('success', 'You were right!', 4000);
+        }
+
+        else {
+            alert('danger', 'You were wrong!', 4000);
+        }
+    },
+    onEnd: function() {
+        State.router.navigate('/finish', {trigger: true});
     }
 });
 

@@ -1,7 +1,7 @@
 'use strict';
 
 var State = require('../state');
-var BaseView = require('./base');
+var BaseView = require('../../shared/views/base');
 var tmpl = require('./waiting.hbs');
 
 var WaitingView = BaseView.extend({
