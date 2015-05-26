@@ -3,25 +3,25 @@
         <div class="col-lg-10 answer-column">
             <div class="question-pane">
                 <span class="question-text">
-                    How many pecks did Peter Piper pick when he was asked a long question?
+                    {{question.question}}
                 </span>
             </div>
             <div class="answer-grid">
                 <button class="btn btn-info btn-lg btn-buzz-answer"></button>
                 <span class="answer">
-                    About a dozen less than he was asked for
+                    {{question.options.[0]}}
                 </span>
                 <button class="btn btn-primary btn-lg btn-buzz-answer"></button>
                 <span class="answer">
-                    About a dozen less than he was asked for
+                    {{question.options.[1]}}
                 </span>
                 <button class="btn btn-success btn-lg btn-buzz-answer"></button>
                 <span class="answer">
-                    About a dozen less than he was asked for
+                    {{question.options.[2]}}
                 </span>
                 <button class="btn btn-danger btn-lg btn-buzz-answer"></button>
                 <span class="answer">
-                    About a dozen less than he was asked for
+                    {{question.options.[3]}}
                 </span>
             </div>
         </div>

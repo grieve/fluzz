@@ -12,7 +12,7 @@ var QuestionView = BaseView.extend({
         State.socket.on('fluzz:question', this.onQuestion.bind(this));
     },
     render: function() {
-        this.$el.html(tmpl());
+        this.$el.html(tmpl(this.context));
     },
     onQuestion: function(question) {
         this.context.question = question;
