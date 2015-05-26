@@ -43,10 +43,12 @@
         </div>
         <div class="col-lg-2">
             <ul class="list-group players-list">
-                <li class="list-group-item list-group-item-info">
-                    <span class="badge">14</span>
-                    Neil
+                {{#each players}}
+                <li class="list-group-item list-group-item-{{this.answer}}">
+                <span class="badge">{{this.score}}</span>
+                    {{this.name}}
                 </li>
+                {{/each}}
                 <li class="list-group-item">
                     <span class="badge">14</span>
                     Paddy

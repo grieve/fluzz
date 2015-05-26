@@ -19,6 +19,7 @@ var QuestionView = BaseView.extend({
         State.socket.on('fluzz:question', this.onQuestion.bind(this));
         State.socket.on('fluzz:result', this.onResult.bind(this));
         State.socket.on('fluzz:end', this.onEnd.bind(this));
+        State.socket.on('fluzz:players', this.onPlayers.bind(this));
     },
     render: function() {
         this.$el.html(tmpl(this.context));
@@ -37,6 +38,15 @@ var QuestionView = BaseView.extend({
     },
     onEnd: function() {
         State.router.navigate('live/finish', {trigger: true});
+    },
+    onPlayers: function(players) {
+        for (var idx = 0; idx < players.players.length; idx++) {
+            players.players[idx].answer = this.colorMap[
+                players.players[idx].answer
+            ]
+        }
+        this.context.players = players.players;
+        this.render();
     }
 });
 

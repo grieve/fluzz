@@ -14,6 +14,9 @@ def start():
         broadcast=True,
         namespace=""
     )
+    for p in models.Player.active_players():
+        p.score = 0
+        p.save()
     print "start", active._record
     socketio.emit('admin:start', active._record)
 
@@ -27,6 +30,20 @@ def answer():
         broadcast=True,
         namespace=""
     )
+    for p in models.Player.active_players():
+        guess = models.Question.query({
+            'quiz': active.id,
+            'player': p.id,
+            'question': active.current_question
+        }).get()
+        if (
+                guess is not None and
+                guess.answer == active.questions[
+                    active.current_question
+                ]['answer']
+        ):
+            p.score += 1
+            p.save()
 
 
 @io.on('admin:next', namespace='/admin')

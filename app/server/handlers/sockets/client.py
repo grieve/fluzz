@@ -37,8 +37,6 @@ def answer(data):
     }).get()
 
     if already_answered is not None:
-        print 'already answered'
-        print already_answered
         data['selected'] = already_answered.answer
         socketio.emit('fluzz:answer', data, room=session['uuid'])
     else:
@@ -55,7 +53,6 @@ def answer(data):
 def heartbeat():
     player = models.Player.get(session['uuid'])
     now = pytz.utc.localize(datetime.datetime.now())
-    print player.name, now
     player.beat = now
     player.save()
     models.Player.broadcastPlayers()

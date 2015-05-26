@@ -51,18 +51,15 @@ class QueryModel(object):
         self._record.update(kwargs)
 
     def __getattr__(self, name):
-        print 'get', name, self._record
         if name not in self._record:
             return None
         return self._record[name]
 
     def __setattr__(self, name, value):
-        print 'set', name, value
         if name.startswith('_'):
             self.__dict__[name] = value
         else:
             self._record[name] = value
-        print self._record
 
     @classmethod
     def _create(self):
