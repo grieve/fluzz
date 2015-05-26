@@ -51,7 +51,7 @@ module.exports = BaseView.extend({
             console.log('Join OK', data.name);
             State.playerName = data.name;
             $('#player-name').html(" - " + data.name);
-            State.router.navigate('quiz', {trigger: true});
+            State.router.navigate('wait', {trigger: true});
         }
     }
 });

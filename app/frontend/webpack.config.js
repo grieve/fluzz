@@ -14,7 +14,7 @@ module.exports = {
         vendor: ['jquery', 'underscore', 'backbone']
     },
     output: {
-        path: '../static/js',
+        path: '../server/static/js',
         filename: '[name].bundle.js'
     },
     resolve: {

@@ -16,10 +16,11 @@ RUN apt-get install -y \
 
 ADD requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
+RUN pip install rethinkORM  # install broken from requirements.txt
 
 ADD app /app
 WORKDIR /app
 
-CMD ["python", "main.py"]
+CMD ["python", "run.py"]
 
 EXPOSE 5000

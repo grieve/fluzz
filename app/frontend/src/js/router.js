@@ -26,8 +26,10 @@ var Router = Bb.Router.extend({
         this.transition(new Views.controller());
     },
     wait: function() {
+        this.transition(new Views.waiting());
     },
     finish: function() {
+        this.transition(new Views.finished());
     },
     wildcard: function() {
         this.navigate('login', {trigger: true});

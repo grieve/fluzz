@@ -8,7 +8,7 @@ var Tasks = {
     sass: function() {
         gulp.src('./src/scss/main.scss')
             .pipe(sass().on('error', sass.logError))
-            .pipe(gulp.dest('../static/css/'));
+            .pipe(gulp.dest('../server/static/css/'));
     },
     sassWatch: function() {
         gulp.watch('./src/scss/**/*.scss', ['sass']);

@@ -14,6 +14,7 @@ database:
 		-p 0.0.0.0:8080:8080 \
 		--name fluzz-database \
 		$(DB_IMAGE_NAME)
+	@sleep 2 # to ensure db is up
 
 
 run: .dockerbuild database
@@ -31,6 +32,13 @@ shell: .dockerbuild
 		-v $(CURDIR)/app:/app \
 		$(IMAGE_NAME) \
 		bash
+
+clean:
+	find . -name "*.pyc" -exec rm -rf {} \;
+	find . -name "*.swp" -exec rm -rf {} \;
+	find . -name "*.swo" -exec rm -rf {} \;
+	find . -name "node_modules" -exec rm -rf '{}' +
+
 
 frontend: 
 	$(MAKE) -C app/frontend build
