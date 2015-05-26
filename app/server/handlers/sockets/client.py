@@ -1,3 +1,6 @@
+import pytz
+import datetime
+
 from flask import session
 from flask.ext import socketio
 
@@ -46,3 +49,13 @@ def answer(data):
             answer=data['selected']
         )
         socketio.emit('fluzz:answer', data, room=session['uuid'])
+
+
+@io.on('fluzz:heartbeat')
+def heartbeat():
+    player = models.Player.get(session['uuid'])
+    now = pytz.utc.localize(datetime.datetime.now())
+    print player.name, now
+    player.beat = now
+    player.save()
+    models.Player.broadcastPlayers()
