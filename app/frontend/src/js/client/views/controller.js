@@ -12,12 +12,14 @@ var ControllerView = BaseView.extend({
     events: {
         'click .btn-buzz': 'onPress'
     },
+    sockets: {
+        'fluzz:question': 'onQuestion',
+        'fluzz:answer': 'onAnswer',
+        'fluzz:result': 'onResult',
+        'fluzz:end once': 'onEnd'
+    },
     initialize: function() {
         this.context = {};
-        State.socket.on('fluzz:question', this.onQuestion.bind(this));
-        State.socket.on('fluzz:answer', this.onAnswer.bind(this));
-        State.socket.on('fluzz:result', this.onResult.bind(this));
-        State.socket.on('fluzz:end', this.onEnd.bind(this));
     },
     render: function() {
         this.$el.html(tmpl(this.context));

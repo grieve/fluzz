@@ -12,14 +12,16 @@ var QuestionView = BaseView.extend({
         'success',
         'danger'
     ],
+    sockets: {
+        'fluzz:question': 'onQuestion',
+        'fluzz:result': 'onResult',
+        'fluzz:end once': 'onEnd',
+        'fluzz:players': 'onPlayers'
+    },
     initialize: function() {
         this.context = {
             question: State.quiz.questions[State.quiz.current_question]
         };
-        State.socket.on('fluzz:question', this.onQuestion.bind(this));
-        State.socket.on('fluzz:result', this.onResult.bind(this));
-        State.socket.on('fluzz:end', this.onEnd.bind(this));
-        State.socket.on('fluzz:players', this.onPlayers.bind(this));
     },
     render: function() {
         this.$el.html(tmpl(this.context));

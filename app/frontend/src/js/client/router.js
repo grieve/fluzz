@@ -7,10 +7,14 @@ var Views = {
     controller: require('./views/controller'),
     finished: require('./views/finished')
 };
+var State = require('./state');
 
 var Router = Bb.Router.extend({
     initialize: function() {
         this.currentView = null;
+        this.defaults = {
+            socket: State.socket
+        };
     },
     routes: {
         'login': 'login',
@@ -20,33 +24,26 @@ var Router = Bb.Router.extend({
         '*actions': 'wildcard'
     },
     login: function() {
-        this.transition(new Views.login());
+        this.transition(new Views.login(this.defaults));
     },
     quiz: function() {
-        this.transition(new Views.controller());
+        this.transition(new Views.controller(this.defaults));
     },
     wait: function() {
-        this.transition(new Views.waiting());
+        this.transition(new Views.waiting(this.defaults));
     },
     finish: function() {
-        this.transition(new Views.finished());
+        this.transition(new Views.finished(this.defaults));
     },
     wildcard: function() {
         this.navigate('login', {trigger: true});
     },
     transition: function(newView) {
         if (this.currentView != null) {
-            var self = this;
-            this.currentView.destroy(function() {
-                self.currentView = newView;
-                self.currentView.render();
-            });
+            this.currentView.remove();
         }
-
-        else {
-            this.currentView = newView;
-            this.currentView.render();
-        }
+        this.currentView = newView;
+        this.currentView.render();
     }
 });
 

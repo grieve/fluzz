@@ -6,10 +6,14 @@ var Views = {
     quiz: require('./views/question'),
     finished: require('./views/finished')
 };
+var State = require('./state');
 
 var Router = Bb.Router.extend({
     initialize: function() {
         this.currentView = null;
+        this.defaults = {
+            socket: State.socket
+        };
     },
     routes: {
         'live/wait': 'wait',
@@ -19,30 +23,23 @@ var Router = Bb.Router.extend({
     },
     quiz: function(question) {
         console.log(question);
-        this.transition(new Views.quiz());
+        this.transition(new Views.quiz(this.defaults));
     },
     wait: function() {
-        this.transition(new Views.waiting());
+        this.transition(new Views.waiting(this.defaults));
     },
     finish: function() {
-        this.transition(new Views.finished());
+        this.transition(new Views.finished(this.defaults));
     },
     wildcard: function() {
         this.navigate('live/wait', {trigger: true});
     },
     transition: function(newView) {
         if (this.currentView != null) {
-            var self = this;
-            this.currentView.destroy(function() {
-                self.currentView = newView;
-                self.currentView.render();
-            });
+            this.currentView.remove();
         }
-
-        else {
-            this.currentView = newView;
-            this.currentView.render();
-        }
+        this.currentView = newView;
+        this.currentView.render();
     }
 });
 

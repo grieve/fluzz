@@ -5,9 +5,9 @@ var BaseView = require('../../shared/views/base');
 var tmpl = require('./waiting.hbs');
 
 var WaitingView = BaseView.extend({
-    initialize: function() {
-        State.socket.on('fluzz:start', this.onStart.bind(this));
-        State.socket.on('fluzz:presenter', this.onJoin.bind(this));
+    sockets: {
+        'fluzz:start once': 'onStart',
+        'fluzz:presenter': 'onJoin'
     },
     render: function() {
         this.$el.html(tmpl());

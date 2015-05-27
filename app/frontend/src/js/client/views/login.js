@@ -10,12 +10,14 @@ module.exports = BaseView.extend({
     events: {
         'submit form': 'onSubmit'
     },
+    sockets: {
+        'fluzz:join': 'onJoin'
+    },
     initialize: function() {
         this.context = {
             uuid: window.boot.uuid,
             name: window.boot.name
         };
-        State.socket.on('fluzz:join', this.onJoin.bind(this));
     },
     render: function() {
         this.$el.html(tmpl(this.context));
