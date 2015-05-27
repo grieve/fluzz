@@ -1,9 +1,11 @@
+import os
+
 DEBUG = True
 HOST = '0.0.0.0'
 PORT = 5000
 SECRET = 'sdfgnwu34ju3n3i393nf##'
 
-DATABASE_HOST = 'database'
+DATABASE_HOST = os.getenv('DATABASE_HOST', 'database')
 DATABASE_NAME = 'fluzz'
 
 

@@ -46,4 +46,12 @@ frontend:
 frontend-watch:
 	$(MAKE) -C app/frontend watch
 
+deploy: 
+	$(MAKE) -C app/frontend build
+	$(DOCKER) build -t $(IMAGE_NAME)-deploy .
+	$(DOCKER) tag -f $(IMAGE_NAME)-deploy ida.ryangrieve.com/fluzz
+	$(DOCKER) push ida.ryangrieve.com/fluzz
+
+
+
 .PHONY: run frontend
