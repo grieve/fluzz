@@ -5,6 +5,7 @@ var Views = {
     login: require('./views/login'),
     waiting: require('./views/waiting'),
     controller: require('./views/controller'),
+    winner: require('./views/winner'),
     finished: require('./views/finished')
 };
 var State = require('./state');
@@ -20,6 +21,7 @@ var Router = Bb.Router.extend({
         'login': 'login',
         'quiz': 'quiz',
         'wait': 'wait',
+        'winner': 'winner',
         'finish': 'finish',
         '*actions': 'wildcard'
     },
@@ -31,6 +33,9 @@ var Router = Bb.Router.extend({
     },
     wait: function() {
         this.transition(new Views.waiting(this.defaults));
+    },
+    winner: function() {
+        this.transition(new Views.winner(this.defaults));
     },
     finish: function() {
         this.transition(new Views.finished(this.defaults));

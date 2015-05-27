@@ -20,7 +20,8 @@ var QuestionView = BaseView.extend({
     },
     initialize: function() {
         this.context = {
-            question: State.quiz.questions[State.quiz.current_question]
+            question: State.quiz.questions[State.quiz.current_question],
+            correct: [true, true, true, true]
         };
     },
     render: function() {
@@ -28,15 +29,13 @@ var QuestionView = BaseView.extend({
     },
     onQuestion: function(question) {
         this.context.question = question;
+        this.context.correct = [true, true, true, true];
         this.render();
     },
     onResult: function(result) {
-        for (var idx = 0; idx < this.colorMap.length; idx++) {
-            if (idx === result.answer) {
-                continue;
-            }
-            $('.btn-' + this.colorMap[idx]).parent().animate({opacity: 0.3});
-        }
+        this.context.correct = [false, false, false, false];
+        this.context.correct[result.answer] = true;
+        this.render();
     },
     onEnd: function() {
         State.router.navigate('live/finish', {trigger: true});

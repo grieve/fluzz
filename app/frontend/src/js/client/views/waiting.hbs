@@ -1,21 +1,6 @@
-<!--div class="jumbotron">
+<div class="jumbotron">
     <h1>Please wait...</h1>
     <p>
         There is no active quiz right now, just wait a little second.
     </p>
-</div-->
-
-
-<div class="col-xs-12">
-    <div class="alert alert-danger">
-        <h1>Loser!</h1>
-    </div>
-    <ul class="list-group players-list">
-        {{#each players}}
-            <li class="list-group-item {{#if @first}}list-group-item-info{{/if}}">
-                <span class="badge">{{this.score}}</span>
-                {{this.name}}
-            </li>
-        {{/each}}
-    </ul>
 </div>

@@ -1,4 +1,22 @@
-
-<div class="jumbotron">
-    <h1>The quiz is over!</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="jumbotron">
+                <h1>Congratulations {{players.[0].name}}!</h1>
+                <p>Winning with a total of {{players.[0].score}} points.</p>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <ul class="list-group players-list">
+                {{#each players}}
+                    {{#unless @first}}
+                    <li class="list-group-item">
+                        <span class="badge">{{this.score}}</span>
+                        {{this.name}}
+                    </li>
+                    {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
 </div>

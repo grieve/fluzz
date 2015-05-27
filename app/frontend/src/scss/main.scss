@@ -46,6 +46,11 @@ main {
 
     .row {
         height: 25%;
+        opacity: 1;
+
+        &.faded {
+            opacity: 0.2;
+        }
     }
     
     .answer {
