@@ -18,6 +18,10 @@ class QueryCollection(object):
         self.query = self.query.filter(filter)
         return self
 
+    def order_by(self, order):
+        self.query = self.query.order_by(order)
+        return self
+
     def fetch(self):
         results = self.query.run()
         return [

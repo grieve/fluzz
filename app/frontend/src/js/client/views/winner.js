@@ -1,7 +1,7 @@
 'use strict';
 
 var BaseView = require('../../shared/views/base');
-var tmpl = require('./finished.hbs');
+var tmpl = require('./winner.hbs');
 
 var FinishedView = BaseView.extend({
     sockets: {

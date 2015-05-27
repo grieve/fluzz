@@ -52,6 +52,8 @@ def answer(data):
 @io.on('fluzz:heartbeat')
 def heartbeat():
     player = models.Player.get(session['uuid'])
+    if player is None:
+        return
     now = pytz.utc.localize(datetime.datetime.now())
     player.beat = now
     player.save()

@@ -67,8 +67,15 @@ def next_question():
 @io.on('admin:end', namespace='/admin')
 def end():
     quiz.end()
+    scores = models.Player.players_by_score()
+    socketio.emit(
+        'fluzz:winner',
+        namespace="",
+        room=scores[0].id
+    )
     socketio.emit(
         'fluzz:end',
+        [s._record for s in scores],
         broadcast=True,
         namespace=""
     )

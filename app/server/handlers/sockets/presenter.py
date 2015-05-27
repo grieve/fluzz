@@ -8,4 +8,6 @@ from ... import models
 @io.on('fluzz:presenter')
 def join():
     active = models.Quiz.query({'active': True}).get()
-    socketio.emit('fluzz:presenter', active._record)
+    if active is not None:
+        active = active._record
+    socketio.emit('fluzz:presenter', active)

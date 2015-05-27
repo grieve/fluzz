@@ -16,6 +16,7 @@ var ControllerView = BaseView.extend({
         'fluzz:question': 'onQuestion',
         'fluzz:answer': 'onAnswer',
         'fluzz:result': 'onResult',
+        'fluzz:winner': 'onWin',
         'fluzz:end once': 'onEnd'
     },
     initialize: function() {
@@ -64,6 +65,9 @@ var ControllerView = BaseView.extend({
         else {
             alert('danger', 'You were wrong!', 4000);
         }
+    },
+    onWin: function() {
+        State.router.navigate('/winner', {trigger: true});
     },
     onEnd: function() {
         State.router.navigate('/finish', {trigger: true});

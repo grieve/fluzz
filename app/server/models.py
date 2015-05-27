@@ -30,6 +30,16 @@ class Player(orm.QueryModel):
         return players
 
     @classmethod
+    def players_by_score(cls):
+        watershed = datetime.datetime.now() - datetime.timedelta(minutes=1)
+        players = cls.query(
+            rdb.row['beat'] > pytz.utc.localize(watershed)
+        ).order_by(
+            rdb.desc('score')
+        ).fetch()
+        return players
+
+    @classmethod
     def broadcastPlayers(cls):
         quiz = Quiz.query({'active': True}).get()
         players = []
