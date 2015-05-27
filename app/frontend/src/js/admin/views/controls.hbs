@@ -15,7 +15,7 @@
         </button>
         <button
             class="btn btn-warning btn-buzz"
-            {{#unless quiz.name}}disabled="disabled"{{/unless}}
+            {{#if roundEnded}}disabled="disabled"{{/if}}
             id="answer"
         >
             End Round

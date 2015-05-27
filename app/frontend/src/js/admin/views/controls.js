@@ -13,27 +13,33 @@ var Controls = BaseView.extend({
         'click #next': 'onButtonNext',
         'click #end': 'onButtonEnd'
     },
+    sockets: {
+        'admin:start': 'onSocket',
+        'admin:end': 'onSocket',
+        'admin:next': 'onSocket',
+        'admin:answer': 'onSocket'
+    },
     initialize: function() {
         this.context = {
-            quiz: window.boot.active
+            quiz: window.boot.active,
+            roundEnded: true
         };
-
-        var onSocket = this.onSocket.bind(this);
-        State.socket.on('admin:start', onSocket);
-        State.socket.on('admin:end', onSocket);
-        State.socket.on('admin:next', onSocket);
-        State.socket.on('admin:answer', onSocket);
     },
     render: function() {
+        console.log(this.context);
         this.$el.html(tmpl(this.context));
     },
     onButtonStart: function() {
+        this.context.roundEnded = false;
         State.socket.emit('admin:start');
     },
     onButtonAnswer: function() {
+        this.context.roundEnded = true;
         State.socket.emit('admin:answer');
+        this.render();
     },
     onButtonNext: function() {
+        this.context.roundEnded = false;
         State.socket.emit('admin:next');
     },
     onButtonEnd: function() {
