@@ -8,7 +8,7 @@ argparse==1.2.1
 cffi==0.8.6
 chardet==2.3.0
 colorama==0.3.2
-cryptography==0.6.1
+cryptography==3.2
 gevent==1.0.2
 gevent-socketio==0.3.6
 gevent-websocket==0.9.3
